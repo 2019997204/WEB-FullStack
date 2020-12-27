@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://mockjs.com/dist/mock.js"></script>
+</head>
+
+<body>
+    页码: <input type="number" id="pagenum" value="1">&nbsp;&nbsp;&nbsp;&nbsp;
+    数量: <input type="number" id="count" value="3">&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="submit">提交</button>
+    <pre></pre>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    // 数据结构
+    /* {
+        "status": 0,
+            "data": [
+                {
+                    "tid": "1",
+                    "title": "12154545",
+                    "catalog": "index",
+                    "fav": 20,
+                    "created": "1436864169",
+                    "isEnd": "0",
+                    "answer": "10",
+                    "user": {
+                        "avatar": "用户头像",
+                        "name": "用户昵称",
+                        "isVip": "1",
+                        "level": "4"
+                    }
+                }
+            ],
+                "msg": "返回Mock数据"
+    } */
+    /* 要求和建议：
+
+        1. 了解数字、日期、字符串的随机数据的产生方式。
+
+        2. 如何发送简单的数据请求，并让Mock使用正则匹配lists请求。
+
+        3. 获取传入的参数，并生成指定数量的Mock测试数据。
+
+        4. 可以使用start.zip中的代码，但是，需要自己先思考下。 */
+    /* 任务描述
+    1.接口为GET请求。
+    2.传递两个参数num与Page。
+    3.传递参数num，num=3即返回data数据为3个，num为10，则返回10个。page传一个整数。
+    4.数据结构与上图中一致。
+    5.接口路径，即Api为“/lists”
+    6.不限于接口测试类的工具，但是需要使用到Mock数据（有的同学可能会去使用DOClever也行） */
+    var s=1;
+    $("#submit").click(function () { 
+        s=$("#count").val();
+        $.ajax({
+            type:"get",
+            url:"/lists",
+            dataType:"json",
+            success:function(res){
+                $("pre").text(JSON.stringify(res,null,2));
+            },
+            error:function(err){
+                console.log(err)
+            }
+        });
+     });
+
+    Mock.mock('/lists','get',()=>{
+        var page=$("#pagenum").val();
+        var count=$("#count").val();
+        return Mock.mock({
+            "status":0,
+            [`data|${count}`]:[
+                {
+                    "tid|+1":count*(page-1)+1,
+                    "title":'@title',
+                    "catalog":/[a-zA-Z]{5}/,
+                    "fav|1-100":0,
+                    "created":'@date',
+                    "isEnd|0-1":1,
+                    "answer|1-1000":1,
+                    "user":{
+                        "avatar":"@image(40x40)",
+                        "name":'@cname',
+                        "isVip|0-1":1,
+                        "level|1-10":1
+                    }
+                }
+            ],
+            "msg": "返回Mock数据"
+        });
+    });
+</script>
+
+</html>

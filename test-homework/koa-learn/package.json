@@ -1,0 +1,46 @@
+{
+  "name": "test8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/8-4/index.js",
+    "start-es6": "npx nodemon --exec babel-node src/8-4/index.js ",
+    "webpack:debug": "npx node --inspect-brk ./node_modules/.bin/webpack --inline --progress",
+    "build": "cross-env NODE_ENV=prod webpack --config config/webpack.config.prod.js",
+    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node --inspect ./src/index.js",
+    "clean": "rimraf dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.0.1",
+    "rimraf": "^3.0.2",
+    "terser-webpack-plugin": "^1.4.1",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^4.2.0",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^2.5.2"
+  },
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-combine-routers": "^4.0.2",
+    "koa-compose": "^4.1.0",
+    "koa-compress": "^5.0.1",
+    "koa-helmet": "^6.0.0",
+    "koa-json": "^2.0.2",
+    "koa-router": "^10.0.0",
+    "koa-static": "^5.0.0",
+    "nodemon": "^2.0.6"
+  }
+}
