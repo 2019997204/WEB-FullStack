@@ -4,18 +4,24 @@
       <form class="layui-form layui-form-pane" action="">
         <div class="layui-form-item">
           <label class="layui-form-label">用户名</label>
-          <div class="layui-input-inline">
-            <input
-              type="text"
-              name="name"
-              v-model="name"
-              v-validate="'required|email'"
-              placeholder="请输入用户名"
-              autocomplete="off"
-              class="layui-input"
-            />
-          </div>
-          <div class="error layui-form-mid">{{errors.first('name')}}</div>
+          <validation-provider
+            name="用户名"
+            rules="required|email"
+            v-slot="{ errors }"
+          >
+            <div class="layui-input-inline">
+              <input
+                type="text"
+                name="name"
+                v-model.trim="name"
+                placeholder="请输入用户名"
+                autocomplete="off"
+                class="layui-input"
+              />
+              <div class="error layui-form-mid">{{ errors[0] }}</div>
+            </div>
+          </validation-provider>
+          <!-- <div class="error layui-form-mid">{{errors.first('name')}}</div> -->
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">密码</label>
@@ -46,9 +52,15 @@
               class="layui-input"
             />
           </div>
-          <div class="layui-form-mid layui-word-aux svg" @click="getCaptcha()" v-html="svg"></div>
+          <div
+            class="layui-form-mid layui-word-aux svg"
+            @click="getCaptcha()"
+            v-html="svg"
+          ></div>
         </div>
-        <button type="button" class="layui-btn" @click="checkForm()">立即登录</button>
+        <button type="button" class="layui-btn" @click="checkForm()">
+          立即登录
+        </button>
         <a href="http://www.layui.com" class="imooc-link">忘记密码</a>
       </form>
     </div>
@@ -56,6 +68,16 @@
 </template>
 <script>
 import axios from 'axios'
+import { ValidationProvider, extend } from 'vee-validate'
+import * as rules from 'vee-validate/dist/rules'
+import zh from 'vee-validate/dist/locale/zh_CN'
+
+for (const rule in rules) {
+  extend(rule, {
+    ...rules[rule],
+    message: zh.messages[rule]
+  })
+}
 
 export default {
   name: 'app',
@@ -67,6 +89,9 @@ export default {
       code: '',
       errorMsg: []
     }
+  },
+  components: {
+    ValidationProvider
   },
   mounted () {
     this.getCaptcha()
@@ -98,23 +123,26 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-#app{
+#app {
   background: #f2f2f2;
 }
-.layui-container{
+.layui-container {
   background: #fafafa;
 }
-input{
+input {
   width: 190px;
 }
-.imooc-link{
+.imooc-link {
   margin-left: 10px;
-  &:hover{
+  &:hover {
     color: #009688;
   }
 }
-.svg{
+.svg {
   position: relative;
   top: -15px;
+}
+.error{
+  color: red;
 }
 </style>
