@@ -3,18 +3,24 @@
     <div class="alert">
       <div class="flex">{{msg}}</div>
       <div v-if="type === 'alert'">
-        <div class="btnCommon success" @click="close()">确定</div>
+        <div class="btnCommon success"
+             @click="close()">确定</div>
       </div>
-      <div v-else class="space-round">
-        <div class="btnCommon cancel" @click="cancelEvent()">取消</div>
-        <div class="btnCommon success" @click="successEvent()">确定</div>
+      <div v-else
+           class="space-round">
+        <div class="btnCommon cancel"
+             @click="cancelEvent()">取消</div>
+        <div class="btnCommon success"
+             @click="successEvent()">确定</div>
       </div>
     </div>
-    <div class="mask" @click="closeMask()"></div>
+    <div class="mask"
+         @click="closeMask()"></div>
   </div>
 </template>
 
 <script>
+/* eslint-disabled */
 export default {
   props: {
     type: {
