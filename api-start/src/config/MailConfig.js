@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+// import nodemailer from 'nodemailer'
 
 // async..await is not allowed in global scope, must use a wrapper
 async function send(sendInfo) {
@@ -7,15 +7,15 @@ async function send(sendInfo) {
   // let testAccount = await nodemailer.createTestAccount()
 
   // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
+  /*   const transporter = nodemailer.createTransport({
     host: 'smtp.qq.com',
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
       user: 'imoocbrian@qq.com', // generated ethereal user
-      pass: 'rbkcbxwrurygjfca', // generated ethereal password
-    },
-  })
+      pass: 'rbkcbxwrurygjfca' // generated ethereal password
+    }
+  }) */
 
   // let sendInfo = {
   //   code: '1234',
@@ -24,16 +24,13 @@ async function send(sendInfo) {
   //   user: 'Brian',
   // }
 
-  let url = 'http://www.imooc.com'
+  // const url = 'http://www.imooc.com'
 
   // send mail with defined transport object
-  let info = await transporter.sendMail({
+  /* const info = await transporter.sendMail({
     from: '"认证邮件" <imoocbrian@qq.com>', // sender address
     to: sendInfo.email, // list of receivers
-    subject:
-      sendInfo.user !== ''
-        ? `你好开发者，${sendInfo.user}！《慕课网前端全栈实践》注册码`
-        : '《慕课网前端全栈实践》注册码', // Subject line
+    subject: sendInfo.user !== '' ? `你好开发者，${sendInfo.user}！《慕课网前端全栈实践》注册码` : '《慕课网前端全栈实践》注册码', // Subject line
     text: `您在《慕课网前端全栈实践》课程中注册，您的邀请码是${
       sendInfo.code
     },邀请码的过期时间: ${sendInfo.expire}`, // plain text body
@@ -49,10 +46,10 @@ async function send(sendInfo) {
         </div>
         <div style="background: #fafafa; color: #b4b4b4;text-align: center; line-height: 45px; height: 45px; position: absolute; left: 0; bottom: 0;width: 100%;">系统邮件，请勿直接回复</div>
     </div>
-    `, // html body
+    ` // html body
   })
-
-  return 'Message sent: %s', info.messageId
+ */
+  return '\'Message sent: %s\', info.messageId'
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
