@@ -4,13 +4,13 @@ const REDIS = {
   port: 15001,
   password: '123456'
 } */
-const MYSQL_CONF = {
+/* const MYSQL_CONF = {
   host: 'localhost',
   user: 'root',
   password: '123456',
   port: '27017',
   database: 'BookStore'
-};
+}; */
 const REDIS = {
   port: 6379,
   host: '127.0.0.1'
