@@ -15,7 +15,7 @@ const REDIS = {
   port: 6379,
   host: '127.0.0.1'
 }
-const DB_URL = 'mongodb://127.0.0.1:27017'
+const DB_URL = 'mongodb://127.0.0.1:27017/WebBlog'
 // const DB_URL = 'mongodb' + MYSQL_CONF.user + ':' + MYSQL_CONF.password + '@' + MYSQL_CONF.host + ':' + MYSQL_CONF.port + '/' + MYSQL_CONF.database
 const JWT_SECRET = 'a&*38QthAKuiRwISGLotgq^3%^$zvA3A6Hfr8MF$jM*HY4*dWcwAW&9NGp7*b53!'
 
